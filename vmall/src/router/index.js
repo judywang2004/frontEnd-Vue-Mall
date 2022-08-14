@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import indexWrap from '@/components/indexWrap'
 
 const routes = [
   {
     path: '/',
-    name: 'HelloWorld',
-    component: HelloWorld
+    name: 'indexWrap',
+    component: indexWrap
   },
 ]
 
