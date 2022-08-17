@@ -1,5 +1,5 @@
 <template>
-<!-- headerSearchWarp START-->
+<!-- headerSearchWarp 顶部搜索框 START-->
   <div class='headerSearchWarp'>
    <img class='logo' src="https://res.vmallres.com/portal/1.11.6.303/h5/images/logo_red.png" />
    <!-- search button area -->
@@ -12,13 +12,10 @@
    </div>
 <!-- headerSearchWarp END-->
 
-<!-- Goods Type START -->
+<!-- Goods Type 产品类别 START -->
   <div class='goodsTypeBtn'>
     <van-tabs v-model:active="goodsTypeVal">
-      <van-tab title="标签 1">内容 1</van-tab>
-      <van-tab title="标签 2">内容 2</van-tab>
-      <van-tab title="标签 3">内容 3</van-tab>
-      <van-tab title="标签 4">内容 4</van-tab>
+      <van-tab v-for='n in goodsTypeDataObj.arr' :title="n.txt" />
     </van-tabs>
 
   </div>
@@ -29,6 +26,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import {ref, reactive} from 'vue';
 export default {
   name: 'indexWrap',
@@ -39,6 +37,14 @@ export default {
   },
   setup(){
     let goodsTypeVal = ref(0);
+
+    // goodsTypeBtn
+    let goodsTypeDataObj = reactive({arr:[]})
+    axios.get('/api/goodsTypeData')
+    .then(_d=>{
+      console.log(_d.data)
+      goodsTypeDataObj.arr = _d.data;
+    })
     return { goodsTypeVal };
   }
 }
@@ -50,6 +56,7 @@ export default {
 .headerSearchWarp{
  padding: 0 16px;
  position: relative;
+ height: 60px;
 }
 .headerSearchWarp img.logo{
   position: absolute;
@@ -79,5 +86,18 @@ export default {
 }
 
 /* headerSearchWarp END */
+
+/* Goods Type 产品类别 START */
+.goodsTypeBtn{}
+.goodsTypeBtn  ::v-deep .van-tab{
+  background: #c3c3c3;
+  margin-right: 8px;height: 30px;
+  border-radius: 20px;
+}
+.goodsTypeBtn  ::v-deep .van-tabs__line{
+  display: none;
+}
+
+/* Goods Type 产品类别 END */
 
 </style>
