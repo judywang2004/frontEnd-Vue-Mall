@@ -14,13 +14,69 @@
 
 <!-- Goods Type 产品类别 START -->
   <div class='goodsTypeBtn'>
-    <van-tabs v-model:active="goodsTypeVal">
-      <van-tab v-for='n in goodsTypeDataObj.arr' :title="n.txt" />
+    <van-tabs v-model:active='goodsTypeVal'>
+      <van-tab v-for='n in goodsTypeDataObj.arr' :title='n.txt' />
     </van-tabs>
 
   </div>
-
 <!-- Goods Type END-->
+
+<!-- Swipe START -->
+<van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+  <van-swipe-item v-for='n in swipeObj.arr'> 
+    <img :src="n.imgurl"  width="300" height="100"/>
+  </van-swipe-item>
+</van-swipe>
+<!-- Swipe END -->
+
+<!-- Grid, Draggable goods START -->
+<div class='goodsDragBtnList'>
+    <!-- Only to create a container for scroll,width is 200%-->
+    <div style='width:200%'>
+      <van-grid :column-num="6" >
+        <van-grid-item v-for='n in gridGoodsObj.arr'>
+          <img :src="n.imgurl" />
+          <p>{{n.txt}}</p>
+        </van-grid-item>
+      </van-grid>
+    </div>
+</div>
+<!-- Grid, Draggable goods END -->
+
+<!-- limitBuy START -->
+<div class='limitBuy'>
+  <p class='title_1'>Limited Time Purchase</p>
+  <em class='title_2'>Quick Hands</em>
+
+  <!-- Count Down timer START-->
+  <van-count-down class='countDownSty' :time="countDownTime">
+    <template #default="timeData">
+      <span class="block">{{ timeData.hours }}</span>
+      <span class="colon">:</span>
+      <span class="block">{{ timeData.minutes }}</span>
+      <span class="colon">:</span>
+      <span class="block">{{ timeData.seconds }}</span>
+    </template>
+  </van-count-down>
+  <!-- Count Down timer END-->
+  <!-- Countdown products START-->
+  <van-row class='limitGoodSty'>
+    <van-col span="6" v-for='n in limitGoodsObj.arr'>
+      <img :src="n.imgurl" />
+      <p class='price_1'>{{n.price}} </p>
+      <b class='price_2'>{{n.ol_price}}</b>
+    </van-col>
+  </van-row>
+  <!-- Countdown products END-->
+</div>
+<!-- limitBuy END -->
+
+<!-- Advertisement Space START -->
+<div class='adSpace'>
+ <img alt="" draggable="false" src="https://res.vmallres.com/uomcdn/CN/cms/202207/F16F54C21A356F33475F8228D41D1A7E.gif" />
+</div>  
+<!-- Advertisement Space END -->
+
 
 
 </template>
@@ -42,10 +98,43 @@ export default {
     let goodsTypeDataObj = reactive({arr:[]})
     axios.get('/api/goodsTypeData')
     .then(_d=>{
-      console.log(_d.data)
+      //console.log('_d.data:',_d.data)
       goodsTypeDataObj.arr = _d.data;
-    })
-    return { goodsTypeVal };
+    });
+
+    // swipe
+    let swipeObj = reactive({arr:[]})
+    axios.get('/api/swipeData')
+    .then(_d=>{
+      //console.log('_d.data:',_d.data)
+      swipeObj.arr = _d.data;
+    });
+
+    //Grid, Draggable goods 
+    let gridGoodsObj = reactive({arr:[]})
+    axios.get('/api/gridGoodsData')
+    .then(_d=>{
+      //console.log('gridGoodsData.data:',_d.data)
+      gridGoodsObj.arr = _d.data;
+    });
+
+    //Count Down timer
+    const countDownTime = ref(30 * 60 * 60 * 1000);
+
+    //limitGoods
+    let limitGoodsObj = reactive({arr:[]})
+    axios.get('/api/limitGoodsData')
+    .then(_d=>{
+      console.log('limitGoodsData.data:',_d.data)
+      limitGoodsObj.arr = _d.data;
+    });
+
+    return {  goodsTypeVal, 
+              goodsTypeDataObj,
+              swipeObj,
+              gridGoodsObj,
+              countDownTime,
+              limitGoodsObj };
   }
 }
 </script>
@@ -100,4 +189,81 @@ export default {
 
 /* Goods Type 产品类别 END */
 
+/* Swipe Start */
+.my-swipe .van-swipe-item {
+    color: #fff;
+    font-size: 20px;
+    line-height: 150px;
+    text-align: center;
+    background-color: #39a9ed;
+  }
+/* Swipe END */
+
+/* Grid, Draggable goods START */
+.goodsDragBtnList{
+  overflow-x:scroll;
+}
+/*
+ ::-webkit-scrollbar,
+ Different browser has different ways to implement, it ha
+ It has compilation issue.
+ */
+.goodsDragBtnList ::-webkit-scrollbar{ /*Safari works with or without space. Chrome works without space before : */
+  display: none;
+}
+.goodsDragBtnList img{
+  width: 48px;height: 48px;
+}
+/* Grid, Draggable goods END */
+
+/* limitBuy START */
+.limitBuy{
+  position:relative;
+  background: #c0a1a1; margin: 0 12px;
+  border-radius: 20px;height: 164px;
+  overflow: hidden;
+}
+.limitBuy p.title_1{
+  font-size:16px;font-weight:bold;
+  position:absolute;left:10px;top:10px
+}
+.limitBuy em.title_2{
+  position: absolute;top:15px;left: 190px;
+  font-size: 12px; background-color: rgba(237, 111, 33, 0.1);
+}
+
+.limitBuy .colon {
+    display: inline-block;
+    margin: 0 4px;
+    color: #ee0a24;
+  }
+.limitBuy .block {
+    display: inline-block;
+    width: 22px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    background-color: #ee0a24;
+  }
+  .countDownSty{
+    position:absolute;top: 15px; right: 30px;
+  }
+  .limitGoodSty{
+    margin-top: 50px;
+  }
+  .limitGoodSty img{
+    width:58px;height: 58px
+  }
+  .limitGoodSty p.price_1{color: #f00;font-weight: bold}
+  .limitGoodSty b.price_2{color: #666;text-decoration-line: line-through;}
+/* limitBuy END */
+
+/*  Advertisement Space START */
+.adSpace{
+  margin: 16px;
+  overflow: hidden;
+  border-radius: 20px;
+
+}
+/*  Advertisement Space END */
 </style>
