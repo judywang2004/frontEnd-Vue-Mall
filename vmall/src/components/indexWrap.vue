@@ -84,6 +84,7 @@
 <script>
 import axios from 'axios'
 import {ref, reactive} from 'vue';
+import requestFn from '@/utils/https'
 export default {
   name: 'indexWrap',
   data(){
@@ -96,38 +97,47 @@ export default {
 
     // goodsTypeBtn
     let goodsTypeDataObj = reactive({arr:[]})
-    axios.get('/api/goodsTypeData')
-    .then(_d=>{
-      //console.log('_d.data:',_d.data)
-      goodsTypeDataObj.arr = _d.data;
-    });
+    requestFn({
+             url:'/goodsTypeData',
+             method: 'get' 
+             })
+             .then(_d=>{
+               goodsTypeDataObj.arr = _d.data;
+             });
 
     // swipe
     let swipeObj = reactive({arr:[]})
-    axios.get('/api/swipeData')
-    .then(_d=>{
-      //console.log('_d.data:',_d.data)
-      swipeObj.arr = _d.data;
-    });
+    requestFn({
+             url:'/swipeData',
+             method: 'get' 
+             })
+             .then(_d=>{
+               swipeObj.arr = _d.data;
+             });
 
     //Grid, Draggable goods 
     let gridGoodsObj = reactive({arr:[]})
-    axios.get('/api/gridGoodsData')
-    .then(_d=>{
-      //console.log('gridGoodsData.data:',_d.data)
-      gridGoodsObj.arr = _d.data;
-    });
+    requestFn({
+             url:'/gridGoodsData',
+             method: 'get' 
+             })
+             .then(_d=>{
+               gridGoodsObj.arr = _d.data;
+             });
+    
 
     //Count Down timer
     const countDownTime = ref(30 * 60 * 60 * 1000);
 
     //limitGoods
     let limitGoodsObj = reactive({arr:[]})
-    axios.get('/api/limitGoodsData')
-    .then(_d=>{
-      console.log('limitGoodsData.data:',_d.data)
-      limitGoodsObj.arr = _d.data;
-    });
+    requestFn({
+             url:'/limitGoodsData',
+             method: 'get' 
+             })
+             .then(_d=>{
+               limitGoodsObj.arr = _d.data;
+             });
 
     return {  goodsTypeVal, 
               goodsTypeDataObj,
