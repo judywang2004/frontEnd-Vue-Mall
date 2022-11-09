@@ -6,6 +6,9 @@ Details are in package.json
 npm : 8.11.0
 node: v16.16.0
 
+Tools: 
+FrontSide + MiddleWare: Visual Studio Code
+
 1: Environment Setup
 1.1 Create a folder name is VMALL under project foot folder
 1.2 cd into folder VMALL
@@ -15,7 +18,6 @@ vue create "Project Name"
 1.3 npm i axios -D
 
 2: Front Side
-Tool: Visual Studio Code
 2.1 Launch : Terminal : Go to the root folder of the project. Here is the where README is
          npm run serve
 
