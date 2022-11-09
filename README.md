@@ -4,13 +4,12 @@ vue3 + vant3 +mysql + node.js
 Environment :
 VUE3, VANT3, axios
 MySQL, 
-
 npm : 8.11.0
 node: v16.16.0
 
 Details are in package.json
 
-Tools: 
+IDE: 
 FrontSide + MiddleWare: Visual Studio Code
 
 1: Environment Setup
