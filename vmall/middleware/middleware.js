@@ -30,11 +30,11 @@ app.get('/goodsTypeData',function(req,res){
 // Swipe Start 
 app.get('/swipeData',function(req,res){
     let _d =[{
-          imgurl:'https://res.vmallres.com/pimages//pages/picImages/57348574663617584375.jpg'
+          imgurl:'https://images.unsplash.com/photo-1523275335684-37898b6baf30'
        },{
-          imgurl: 'https://res.vmallres.com/pimages//pages/picImages/68557574663617575586.jpg'
+          imgurl: 'https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79'
        },{
-          imgurl: 'https://res.vmallres.com/pimages//pages/picImages/32887574663617578823.jpg'
+          imgurl: 'https://images.unsplash.com/photo-1504375243548-4c974e20e993'
        }]
        res.send(_d )
 
@@ -43,28 +43,28 @@ app.get('/swipeData',function(req,res){
 // Grid, draggable Butten list
 app.get('/gridGoodsData',function(req,res){
     let _d = [{
-        imgurl:"https://res.vmallres.com/uomcdn/CN/cms/202205/5E0C9E2502B467B23042E572E639243A.png.75.webp",
+        imgurl:"https://images.unsplash.com/photo-1523275335684-37898b6baf30",
         txt:"AI Office"
     },{
-        imgurl:"https://res.vmallres.com/uomcdn/CN/cms/202207/E615C067A45F4E3EFB234CE86B6CA69B.png.75.webp",
+        imgurl:"https://images.unsplash.com/photo-1546868871-7041f2a55e12",
         txt: "AI computer"
     },{
-        imgurl:"https://res.vmallres.com/uomcdn/CN/cms/202208/58DB5B0A3F5529A5DE787DCFD10E65D4.webp",
+        imgurl:"https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79",
         txt: "AIHome"
     },{
-        imgurl: "https://res.vmallres.com/uomcdn/CN/cms/202206/F82423F6E11CABD5998B76397853117F.png.75.webp",
+        imgurl: "https://images.unsplash.com/photo-1464564531096-f0163633a18a", 
         txt: "Cellphone"
     },{
-        imgurl: "https://res.vmallres.com/uomcdn/CN/cms/202207/E69A96C8F75A8C93E6DB5BEE5BA6F180.png.75.webp",
+        imgurl: "https://images.unsplash.com/photo-1483032469466-b937c425697b",
         txt: "HealthKit"
     },{
-        imgurl: "https://res.vmallres.com/uomcdn/CN/cms/202207/E69A96C8F75A8C93E6DB5BEE5BA6F180.png.75.webp",
+        imgurl: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
         txt: "HealthKit2"
     },{
-        imgurl: "https://res.vmallres.com/uomcdn/CN/cms/202207/E69A96C8F75A8C93E6DB5BEE5BA6F180.png.75.webp",
+        imgurl: "https://images.unsplash.com/photo-1524678606370-a47ad25cb82a",
         txt: "HealthKit3"
     },{
-        imgurl: "https://res.vmallres.com/uomcdn/CN/cms/202207/E69A96C8F75A8C93E6DB5BEE5BA6F180.png.75.webp",
+        imgurl: "https://images.unsplash.com/photo-1505751104546-4b63c93054b1",
         txt: "HealthKit4"
     }]
     res.send( _d)
