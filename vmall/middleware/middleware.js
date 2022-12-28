@@ -93,6 +93,104 @@ app.get('/limitGoodsData',function(req,res){
     res.send( _d )
 })
 
+//category page, sidebar nav, menu
+app.get('/sidebarItemName',function(req,res){
+    let _d = [{
+                sideName:'New Arrive'
+             },{
+             sideName:'Cellphone'
+             },{
+                sideName:'Computer'
+             },{
+                sideName:'iPad'
+             },{
+                sideName:'SmartWatch' 
+             },{
+             sideName:'Cellphone'
+             },{
+                sideName:'Computer'
+             },{
+                sideName:'iPad'
+             },{
+                sideName:'SmartWatch'
+            },{
+                sideName:'Cellphone'
+            },{
+                sideName:'Computer'
+            },{
+                sideName:'iPad'
+            },{
+                sideName:'SmartWatch'
+                
+            }]
+
+    res.send( _d )
+})
+
+// return coresponding value based on sidebar menu index
+app.get('/sidebarGetGoods',function(req,res){
+    let sidebarInx = Number(req.query.n);
+    let _d =  [{
+        inx:0,
+        title:'New Arrival',
+        goods:[{
+                goodsInx:'11',
+                imgurl:'https://res.vmallres.com//cmscdn/CN/2022-10/1a98b191236a4e6a9281792b52709149.png',
+                goodsName:'Car',
+            },{
+                goodsInx:'12',
+                imgurl:'https://res.vmallres.com//cmscdn/CN/2022-10/6bfe8588574e49249799b3352d58aa9c.png',
+                goodsName:'Car2',
+            },{
+                goodsInx:'13',
+                imgurl:'https://res.vmallres.com/pimages//uomcdn/CN/pms/202208/gbom/6941487276479/428_428_0F233DFEF531B9659EFC70F8934BFA16mp.jpg',
+                goodsName:'111',
+            },]
+
+    },{
+        inx:1,
+        title:'Car Accessary',
+        goods:[{
+                goodsInx:'14',
+                imgurl:'https://res.vmallres.com/pimages//FssCdnProxy/vmall_bop_server/BopMaterialCenter/428_428_1FD209DE45835020E928403BB003AE73.png',
+                goodsName:'222',
+            },{
+                goodsInx:'15',
+                imgurl:'https://res.vmallres.com/pimages//uomcdn/CN/pms/202205/gbom/6971943680502/428_428_03B5D75B9D28AC9DAAE0CB7C54ABA55Emp.png',
+                goodsName:'222',
+            },{
+                goodsInx:'16',
+                imgurl:'https://res.vmallres.com/pimages//uomcdn/CN/pms/202210/gbom/6941487286843/428_428_3F569A0F0BD7A75ED877115F0FB114E5mp.png',
+                goodsName:'333',
+            },]
+
+    },{
+        inx:2,
+        title:'cellphone',
+        goods:[{
+                goodsInx:'17',
+                imgurl:'https://res.vmallres.com/pimages//FssCdnProxy/vmall_bop_server/BopMaterialCenter/428_428_4E6FF380B8E76F3F045D9E8B2BB53B08.png',
+                goodsName:'222',
+            },{
+                goodsInx:'18',
+                imgurl:'https://res.vmallres.com/pimages//uomcdn/CN/pms/202209/gbom/6971837084188/428_428_5D1F1D498C508C3CA440851AFB9B0E93mp.png',
+                goodsName:'222',
+            },{
+                goodsInx:'19',
+                imgurl:'https://res.vmallres.com/pimages//FssCdnProxy/vmall_bop_server/BopMaterialCenter/428_428_5E874272522442D2A13F44D740FDB5F8.png',
+                goodsName:'333',
+            },]
+
+    }]
+
+    // filter return value based on index
+    let _goods = _d.filter(_obj=>{
+        return _obj.inx ===sidebarInx
+    })
+
+    res.send( _goods )
+})
+
 app.listen(8081,function(){
     console.log('8081, middleware running...')
 })

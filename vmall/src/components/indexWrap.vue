@@ -77,20 +77,26 @@
 </div>  
 <!-- Advertisement Space END -->
 
-
+<!-- footer START -->
+<footerbar />
+<!-- footer End -->
 
 </template>
 
 <script>
 import axios from 'axios'
-import {ref, reactive} from 'vue';
 import requestFn from '@/utils/https'
+import {ref, reactive} from 'vue';
+import footerbar from '@/components/footerbar'
 export default {
   name: 'indexWrap',
   data(){
     return {
       msg:'Vmall home'
     }
+  },
+  components:{
+    footerbar
   },
   setup(){
     let goodsTypeVal = ref(0);
@@ -139,12 +145,15 @@ export default {
                limitGoodsObj.arr = _d.data;
              });
 
+   
     return {  goodsTypeVal, 
               goodsTypeDataObj,
               swipeObj,
               gridGoodsObj,
               countDownTime,
-              limitGoodsObj };
+              limitGoodsObj
+              
+             };
   }
 }
 </script>
@@ -270,9 +279,10 @@ export default {
 
 /*  Advertisement Space START */
 .adSpace{
-  margin: 16px;
+  margin: 0 16px;
   overflow: hidden;
   border-radius: 20px;
+  margin-bottom: 70px;
 
 }
 /*  Advertisement Space END */
