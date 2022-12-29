@@ -134,15 +134,15 @@ app.get('/sidebarGetGoods',function(req,res){
         inx:0,
         title:'New Arrival',
         goods:[{
-                goodsInx:'11',
+                goodsKey:'11',
                 imgurl:'https://res.vmallres.com//cmscdn/CN/2022-10/1a98b191236a4e6a9281792b52709149.png',
                 goodsName:'Car',
             },{
-                goodsInx:'12',
+                goodsKey:'12',
                 imgurl:'https://res.vmallres.com//cmscdn/CN/2022-10/6bfe8588574e49249799b3352d58aa9c.png',
                 goodsName:'Car2',
             },{
-                goodsInx:'13',
+                goodsKey:'13',
                 imgurl:'https://res.vmallres.com/pimages//uomcdn/CN/pms/202208/gbom/6941487276479/428_428_0F233DFEF531B9659EFC70F8934BFA16mp.jpg',
                 goodsName:'111',
             },]
@@ -151,15 +151,15 @@ app.get('/sidebarGetGoods',function(req,res){
         inx:1,
         title:'Car Accessary',
         goods:[{
-                goodsInx:'14',
+                goodsKey:'14',
                 imgurl:'https://res.vmallres.com/pimages//FssCdnProxy/vmall_bop_server/BopMaterialCenter/428_428_1FD209DE45835020E928403BB003AE73.png',
                 goodsName:'222',
             },{
-                goodsInx:'15',
+                goodsKey:'15',
                 imgurl:'https://res.vmallres.com/pimages//uomcdn/CN/pms/202205/gbom/6971943680502/428_428_03B5D75B9D28AC9DAAE0CB7C54ABA55Emp.png',
                 goodsName:'222',
             },{
-                goodsInx:'16',
+                goodsKey:'16',
                 imgurl:'https://res.vmallres.com/pimages//uomcdn/CN/pms/202210/gbom/6941487286843/428_428_3F569A0F0BD7A75ED877115F0FB114E5mp.png',
                 goodsName:'333',
             },]
@@ -168,15 +168,15 @@ app.get('/sidebarGetGoods',function(req,res){
         inx:2,
         title:'cellphone',
         goods:[{
-                goodsInx:'17',
+                goodsKey:'17',
                 imgurl:'https://res.vmallres.com/pimages//FssCdnProxy/vmall_bop_server/BopMaterialCenter/428_428_4E6FF380B8E76F3F045D9E8B2BB53B08.png',
                 goodsName:'222',
             },{
-                goodsInx:'18',
+                goodsKey:'18',
                 imgurl:'https://res.vmallres.com/pimages//uomcdn/CN/pms/202209/gbom/6971837084188/428_428_5D1F1D498C508C3CA440851AFB9B0E93mp.png',
                 goodsName:'222',
             },{
-                goodsInx:'19',
+                goodsKey:'19',
                 imgurl:'https://res.vmallres.com/pimages//FssCdnProxy/vmall_bop_server/BopMaterialCenter/428_428_5E874272522442D2A13F44D740FDB5F8.png',
                 goodsName:'333',
             },]
@@ -189,6 +189,79 @@ app.get('/sidebarGetGoods',function(req,res){
     })
 
     res.send( _goods )
+})
+
+// goods products detail , bsed on key .
+// faked data, only 2 for demo
+app.get('/getGoodsDetail',function(req,res){
+    let _key = Number(req.query.key);
+   // console.log(req.query.key)
+
+    let _d = [{
+		goodsKey: 11,
+		goodsImg: [
+			'https://res.vmallres.com/pimages//uomcdn/CN/pms/202205/displayProduct/10086488402232/428_428_a_mobile3F37F412519B440256A62B260A7F8B45.png',
+			'https://res.vmallres.com/pimages//uomcdn/CN/pms/202204/gbom/6941487261352//428_428_79227E5C15D7A07A0E513B8737074254mp.png',
+			'https://res.vmallres.com/pimages//uomcdn/CN/pms/202204/gbom/6941487261352/group//428_428_B13384331D3C89C498BFF042F814B1AB.png'
+		],
+		price: 9999,
+		old_price: 8999,
+		goodsTitle: 'Prod1）',
+		goodsDes: ' New arrival1 >>',
+		promotion: [{
+			title: 'Limited time',
+			des: 'discount 30%'
+		}, {
+			title: '3 payment',
+			des: 'visa,master,paypal'
+		}, {
+			title: 'earn points',
+			des: 'points 10'
+		}],
+		// color and  edition match inventory (number and different id maybe)
+		goodsColor: [{
+			color: 'Black',
+			stock: 999
+		}, {
+			color: 'White',
+			stock: 999
+		}, {
+			color: 'Gold',
+			stock: 0
+		}],
+		edition: [{
+			txt: '8GB+256GB',
+			stock: 222
+		}, {
+			txt: '12GB+512GB',
+			stock: 0
+		}, {
+			txt: '8GB+512GB',
+			stock: 111
+		}]
+		// other features 
+
+	}, {
+		// second prod
+		goodsKey: 12,
+		goodsImg:[
+			'https://res.vmallres.com/pimages//uomcdn/CN/pms/202210/displayProduct/10086315434669/428_428_b_mobile48DD403AEAD1A777C1F34E9DF57F72A7.png',
+			'https://res.vmallres.com/pimages//uomcdn/CN/pms/202208/gbom/6941487279401/group//428_428_CE8D5ADA388A6FC54396DBCC8B82184E.png',
+			'https://res.vmallres.com/pimages//uomcdn/CN/pms/202208/gbom/6941487279401/group//428_428_CD8F0799421269AC23B51F99C0DFA2A0.jpg',
+			'https://res.vmallres.com/pimages//uomcdn/CN/pms/202208/gbom/6941487279401/group//428_428_F8E1AFA7064794F591593A74D2BC3720.jpg'
+		],
+		price: 8338,
+		old_price: 8988,
+		goodsTitle: 'Prod 2'
+	}]
+   
+
+    let _goodsResult = _d.filter(_d => {
+		return _d.goodsKey === _key
+	})
+
+	res.send(_goodsResult)
+
 })
 
 app.listen(8081,function(){

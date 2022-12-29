@@ -137,13 +137,11 @@ export default{
         const router = useRouter();
         //Grid components click event
         const GoodsDetailFn = (n)=>{
-           // console.log(n)
+            // console.log(n)
            router.push({
                 path:'/goodsDetail',
                 query:{
-                    goodsInx: n.goodsInx,
-                    goodsName: n.goodsName,
-                    imgurl: n.imgurl
+                    goodsKey: n.goodsKey,
                 }
            })
         }

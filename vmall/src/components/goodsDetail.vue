@@ -1,5 +1,14 @@
 <template>
-    <h1> {{msg}}</h1>
+  <!-- swipe container-->
+  <div class='swipeWrap'>
+    <van-swipe class="myswipe" :autoplay="3000" indicator-color="white">
+        <van-swipe-item>1</van-swipe-item>
+        <van-swipe-item>2</van-swipe-item>
+        <van-swipe-item>3</van-swipe-item>
+        <van-swipe-item>4</van-swipe-item>
+    </van-swipe>
+
+  </div>
 
 </template>
 
@@ -21,8 +30,38 @@ export default{
     setup(){
         //route
         const route = useRoute();
-        console.log(route.query)
+        //console.log(route.query)
+       //swipe photo link data
+       let swipeImgData = reactive({arr:[]})
+       requestFn({
+            url:'getGoodsDetail',
+            method:'get',
+            data:{
+                key:route.query.goodsKey
+        }
+       })
+       .then(_d=>{
+        console.log(_d.data[0]);
+       // swipeImgData.arr = _d.data[0];
+       });
+
+       return{
+        swipeImgData
+       }
     }
 }
 
 </script>
+
+<style scoped>
+.swipeWrap{
+
+}
+.myswipe .van-swipe-item {
+    color: #fff;
+    font-size: 20px;
+    line-height: 150px;
+    text-align: center;
+    background-color: #39a9ed;
+  }
+</style>
