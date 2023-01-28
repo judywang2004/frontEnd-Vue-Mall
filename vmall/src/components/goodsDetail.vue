@@ -17,7 +17,7 @@
       <p>Cart</p>
       <p>My</p>
     </div>
-    <!-- swipe-->
+    <!-- swipe start-->
     <van-swipe 
         @change="onChangeImgFn"
         class="myswipe" :autoplay="3000" indicator-color="white">
@@ -27,8 +27,14 @@
     </van-swipe>
     <!-- Display img index n of totalImg-->
     <div class="imgInx">{{swipeImgInx}}/{{ swipeImgLengt }}</div>
+    </div>
+    <!-- Swipe end-->
+    <!-- Price, countdown, start-->
+    <div class="goodsPriceDiv">
+      <p>8388</p>
 
-  </div>
+    </div>
+    <!-- Price, countdown, end-->
 
 </template>
 
@@ -148,6 +154,14 @@ export default{
 	line-height: 25px;
 }
 /* Price CountingDown  */
+.goodsPriceDiv{
+	width:100%;height: 56px;
+	background-image: linear-gradient(90deg, #FF313F 0%, #FF935A 100%);
+}
+.goodsPriceDiv p{
+	font-size: 33px;color:#fff;font-weight: bold;
+}
+/* Price, countdown, start */
 .goodsPriceDiv{
 	width:100%;height: 56px;
 	background-image: linear-gradient(90deg, #FF313F 0%, #FF935A 100%);
