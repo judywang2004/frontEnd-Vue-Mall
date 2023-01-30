@@ -29,10 +29,29 @@
     <div class="imgInx">{{swipeImgInx}}/{{ swipeImgLengt }}</div>
     </div>
     <!-- Swipe end-->
-    <!-- Price, countdown, start-->
+    <!-- Price promotion, countdown, start-->
     <div class="goodsPriceDiv">
-      <p>8388</p>
-
+      <div>
+        <p class="p1">Limited</p>
+        <p class="p2">
+          <small>$</small>
+          799
+          <span>$899</span>
+        </p>
+      </div>
+      <!--Counting down-->
+      <div class="goodsPriceRight">
+        <span class="p3">Counting down</span>
+			<van-count-down :time="countDownTime">
+				<template #default="timeData">
+					<span class="countDownTime_block">{{ timeData.hours }}</span>
+					<span class="countDownTime_colon">:</span>
+					<span class="countDownTime_block">{{ timeData.minutes }}</span>
+					<span class="countDownTime_colon">:</span>
+					<span class="countDownTime_block">{{ timeData.seconds }}</span>
+				</template>
+			</van-count-down>
+      </div>
     </div>
     <!-- Price, countdown, end-->
 
@@ -153,20 +172,102 @@ export default{
 	height: 25px;text-align: center;border-bottom: 1px solid #000;
 	line-height: 25px;
 }
-/* Price CountingDown  */
+/* Price CountingDown  start*/
 .goodsPriceDiv{
 	width:100%;height: 56px;
 	background-image: linear-gradient(90deg, #FF313F 0%, #FF935A 100%);
 }
-.goodsPriceDiv p{
-	font-size: 33px;color:#fff;font-weight: bold;
+
+.goodsPriceDiv p.p1 {
+	font-size: .3rem;
+	color: #fff;
+	font-weight: normal;
+	position: absolute;
+	left: .5rem;
 }
-/* Price, countdown, start */
-.goodsPriceDiv{
-	width:100%;height: 56px;
-	background-image: linear-gradient(90deg, #FF313F 0%, #FF935A 100%);
+
+.goodsPriceDiv p.p2 {
+	font-size: 0.5rem;
+  color:#fff;
+  font-weight: bold;
+  position: absolute;
+  top: 12rem;
+  left: .5rem;
 }
-.goodsPriceDiv p{
-	font-size: 33px;color:#fff;font-weight: bold;
+
+.goodsPriceDiv p.p2 small {
+	font-size: .5rem;
+	font-size: normal;
 }
+
+.goodsPriceDiv p.p2 span {
+	font-size: .5rem;
+	text-decoration: line-through;
+}
+
+.goodsPriceRight {
+	background-color: #fdf0e8;
+	width: 3rem;
+	height: 56px;
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+}
+
+.goodsPriceRight span.p3 {
+	font-size: .2rem;
+	font-size: normal;
+	color: #f00;
+	display: block;
+	margin: .1rem 0 0 0;
+}
+
+.countDownTime_colon {
+	display: inline-block;
+	margin: 0 4px;
+	color: #ee0a24;
+}
+
+.countDownTime_block {
+	display: inline-block;
+	width: 22px;
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+	background-color: #ee0a24;
+}
+
+/* product name,promotion */
+.goodsTitleWrap {
+	margin: 0.4rem;
+	padding: .4rem;
+	background: #f5f5f5;
+	text-align: left;
+	border-radius: .3rem;
+}
+
+.goodsTitleWrap h1 {
+	font-size: .45rem;
+}
+
+.goodsTitleWrap span {
+	color: #f00;
+}
+
+/* product title，bonus */
+.getPromotion {
+	margin: .4rem 0;overflow:hidden;
+}
+.getPromotion label.p1{
+	font-size: .2rem;float: left;margin-right: .4rem;
+}
+.getPromotion ul.p2{
+	display:block;float: left;
+}
+.getPromotion ul.p2 li p.p3,
+.getPromotion ul.p2 li p.p4{
+	border-radius: .1rem;color:#f00;display:inline;
+	border:1px solid #f00;padding:0 .2rem;margin-right: .2rem;
+}
+
 </style>

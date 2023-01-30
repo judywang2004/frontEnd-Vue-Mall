@@ -6,7 +6,7 @@
     let doc = win.document;
     // get <html> ，documentElement，this is the root
     let docEl = doc.documentElement;
-    // console.log( docEl )
+    console.log( docEl )
 
     // meta 
     let metaEl = doc.querySelector('meta[name="viewport"]')
