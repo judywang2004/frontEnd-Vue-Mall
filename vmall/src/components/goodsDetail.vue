@@ -28,8 +28,8 @@
     <!-- Display img index n of totalImg-->
     <div class="imgInx">{{swipeImgInx}}/{{ swipeImgLengt }}</div>
     </div>
-    <!-- Swipe end-->
-    <!-- Price promotion, countdown, start-->
+  <!-- Swipe end-->
+  <!-- Price promotion, countdown, start-->
     <div class="goodsPriceDiv">
       <div>
         <p class="p1">Limited</p>
@@ -53,7 +53,102 @@
 			</van-count-down>
       </div>
     </div>
-    <!-- Price, countdown, end-->
+  <!-- Price, countdown, end-->
+  <!-- Product name,promotion,description, start-->
+  <div class ="goodsTitleWrap">
+    <h1>[NEW] HW 50 Pro 128GB</h1>
+		<span>[Delivery]①$50 ②V1-V5 $10 | Click for more info>></span>
+		<div class="getPromotion" @click="showPromotionFn">
+			<label class="p1">Promotion</label>
+			<ul class="p2">
+				<li>
+					<p class="p3">$50</p>$50
+				</li>
+				<li>
+					<p class="p4">Points</p>Points
+				</li>
+			</ul>
+		</div>
+<!-- Promotion bottom pop up  menu-->
+    <van-action-sheet
+          v-model:show="isPromotionShow"
+          cancel-text="Cancel"
+          close-on-click-action
+          title="Promotion"
+          @cancel="onCancelPromotionBtn"
+      >
+          <div class="content"><h1>Promotion Content</h1></div>
+    </van-action-sheet>
+  </div>
+  <!-- Product name,promotion,description, end-->
+
+  <!-- product sku main start -->
+	<div class="productSkuMain">
+		<dl>
+			<dt>Sale</dt>
+			<dd>
+				<em class="redEm">Full Price</em>
+			</dd>
+		</dl>
+		<dl>
+			<dt>Color</dt>
+			<dd>
+				<em>Black</em><em>Green</em><em>Blue</em><em class="redEm">White</em>
+			</dd>
+		</dl>
+		<dl>
+			<dt>Version</dt>
+			<dd>
+				<em class="redEm">128GB</em><em>256GB</em>
+			</dd>
+		</dl>
+		<dl>
+			<dt>Type</dt>
+			<dd>
+				<em class="redEm">Standard</em>
+			</dd>
+		</dl>
+		<dl>
+			<dt>Amount</dt>
+			<dd><van-stepper v-model="stepperValue" /></dd>
+		</dl>
+		<dl>
+			<dt>Insurance</dt>
+			<dd>
+				<em>Select</em><em class="redEm">S1</em><em class="redEm">S2</em>
+			</dd>
+		</dl>
+	</div>
+	<!-- Product sku main end -->
+
+  <!-- deliver service start -->
+	<div class="productSendAddress">
+		<!-- send to -->
+		<div class="item" style="margin-bottom:.6rem;" @click="addressPopUp">
+			<label>Deliver area</label>
+			<div class="send">
+				<p>Pittsburgh</p>
+				<span style="color:#f00;">In inventary</span>
+			</div>
+		</div>
+		<!-- service -->
+		<div class="item">
+			<label>Shipping</label>
+			<div class="serve">
+				<p>Free shipping $48 </p>
+				<p> 30 days return policy</p>
+			</div>
+		</div>
+		<!-- city selection pop up -->
+		<van-action-sheet
+				v-model:show="isAddressShow"
+				close-on-click-action
+				title="Select States"
+			>
+			<van-area :area-list="areaList" @confirm="resultSelectAddress" />
+		</van-action-sheet>
+	</div>
+	<!-- deliver service end -->
 
 </template>
 
@@ -97,7 +192,7 @@ export default{
         isPopUpMenuShow.value = !isPopUpMenuShow.value
       }
 
-       requestFn({
+      requestFn({
             url:'getGoodsDetail',
             method:'get',
             data:{
@@ -109,15 +204,36 @@ export default{
         swipeImgData.arr = _d.data[0];
         swipeImgLengt.value = _d.data[0].goodsImg.length;
        });
+      //countDownTime
+       const countDownTime = ref(30 * 60 * 60 * 1000);
+      // product promotion bottom pop up menu
+      const isPromotionShow = ref(false);
+      const showPromotionFn=()=>{
+          isPromotionShow.value = !isPromotionShow.value;
+      }
+    
+      const onCancelPromotionBtn = () => {
+        console.log('取消')
+      };
+
+      //product sku 
+      const stepperValue = ref(1)
 
        return{
+        isPromotionShow,
+        onCancelPromotionBtn,
         swipeImgData,
         swipeImgLengt,
         onChangeImgFn,
         swipeImgInx,
         goBackPageFn,
         isPopUpMenuShow,
-        popupWrapFn
+        popupWrapFn,
+        isPopUpMenuShow,
+        countDownTime,
+        showPromotionFn,
+        stepperValue
+
        }
     }
 }
@@ -191,7 +307,7 @@ export default{
   color:#fff;
   font-weight: bold;
   position: absolute;
-  top: 12rem;
+  top: 12.5rem;
   left: .5rem;
 }
 
@@ -208,7 +324,7 @@ export default{
 .goodsPriceRight {
 	background-color: #fdf0e8;
 	width: 3rem;
-	height: 56px;
+	height: 1rem;
 	overflow: hidden;
 	position: absolute;
 	right: 0;
@@ -269,5 +385,60 @@ export default{
 	border-radius: .1rem;color:#f00;display:inline;
 	border:1px solid #f00;padding:0 .2rem;margin-right: .2rem;
 }
+.content {
+    padding: 16px 16px 160px;
+}
 
+/* product sku main start */
+.productSkuMain{
+	margin: 0.4rem;
+	padding: .4rem;
+	background: #f5f5f5;
+	text-align: left;
+	border-radius: .3rem;
+}
+.productSkuMain dl{
+	clear:both;display:block;overflow:hidden;padding:.3rem 0;
+}
+.productSkuMain dl dt,
+.productSkuMain dl dd{
+	float: left;
+}
+.productSkuMain dl dt{
+	margin-right: .3rem;
+}
+.productSkuMain dl dd em{
+	padding:.2rem .3rem;background: #fff;margin-right: .3rem;
+	border-radius: .2rem;
+}
+.productSkuMain dl dd em.redEm{
+	color: #cf0a2c;
+    background: rgba(207,10,44,.05);
+}
+
+/* deliver service start */
+.productSendAddress{
+	margin: 0.4rem;
+    padding: 0.4rem;
+    background: #f5f5f5;
+    text-align: left;
+    border-radius: 0.3rem;
+}
+.productSendAddress div.item{
+	clear:both;overflow:hidden;
+}
+.productSendAddress div.item label{
+	float: left;margin-right: .5rem;
+}
+.productSendAddress div.item div.send,
+.productSendAddress div.item div.serve{
+	float: left;line-height: .6rem;margin-top: -.03rem;
+}
+.productSendAddress div.item div.send p,
+.productSendAddress div.item div.serve p{
+	padding-left: .6rem;
+	background-image: url('../assets/icon_1.png');
+	background-repeat: no-repeat;
+	background-size: .45rem;
+}
 </style>

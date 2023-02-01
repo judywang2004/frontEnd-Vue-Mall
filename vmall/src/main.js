@@ -10,7 +10,7 @@ import { Button } from 'vant'
 // import { NavBar } from 'vant';
 import { Tab, Tabs ,Swipe,SwipeItem,
         Grid, GridItem,CountDown,Col, Row, Tabbar, TabbarItem,
-        Sidebar, SidebarItem} from 'vant';
+        Sidebar, SidebarItem,ActionSheet,Stepper} from 'vant';
 import "vant/lib/index.css";
 
 const app = createApp(App);
@@ -19,6 +19,6 @@ app.use(Button).use(Tab).use(Tabs)
     .use(Grid).use(GridItem).use(CountDown)
     .use(Col).use(Row)
     .use(Tabbar).use(TabbarItem)
-    .use(Sidebar).use(SidebarItem);
+    .use(Sidebar).use(SidebarItem).use(ActionSheet).use(Stepper);
 // app.use(NavBar);
 app.use(store).use(router).mount('#app')
